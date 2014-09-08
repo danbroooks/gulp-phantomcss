@@ -1,7 +1,9 @@
+// from https://github.com/chrisgladd/grunt-phantomcss
+
 var fs = require('fs');
 var s = fs.separator;
 
-// Parse arguments passed in from the grunt task
+// Parse arguments passed in
 var args = JSON.parse(phantom.args[0]);
 
 var viewportSize = {
