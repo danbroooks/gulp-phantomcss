@@ -1,0 +1,20 @@
+{
+  "name": "gulp-phantomcss",
+  "version": "0.0.1",
+  "scripts": {
+    "test": "mocha",
+    "postinstall": "node ./node_modules/bower/bin/bower install"
+  },
+  "files": [
+    "index.js"
+  ],
+  "dependencies": {
+    "gulp-util": "^3.0.0",
+    "bower": "~1.0.3",
+    "through2": "^0.6.1",
+    "phantomjs": "^1.9.7-15"
+  },
+  "devDependencies": {
+    "mocha": "^1"
+  }
+}
