@@ -37,17 +37,26 @@ module.exports = function (opts) {
   }, opts || {});
 
   opts.phantomCSSPath = phantomcss;
-  opts.test = [];
+  var tests = [];
 
   return through.obj(function (file, enc, cb) {
-    opts.test.push(path.resolve(file.path));
+    tests.push( path.resolve(file.path) );
     cb(null, file);
   }, function(cb){
-    spawnPhantom([
-      runnerjs,
-      JSON.stringify(opts)
-    ]).on('exit', function(){
-      cb();
+    var running = 0;
+    tests.forEach(function(test) {
+      console.log(test);
+      opts.test = test;
+      running++;
+
+      spawnPhantom([
+        runnerjs,
+        JSON.stringify(opts)
+      ])
+      .on('exit', function(){
+        running--;
+        if (running === 0) { cb(); }
+      });
     });
   });
 

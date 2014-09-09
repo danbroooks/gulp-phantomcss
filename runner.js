@@ -49,14 +49,12 @@ phantomcss.init({
   }
 });
 
-// Run the test scenarios
-args.test.forEach(function(testSuite) {
-  require(testSuite);
-});
+// Run the test scenario
+require(args.test);
 
 // End tests and compare screenshots
 casper.then(function() {
-  phantomcss.compareAll();
+  phantomcss.compareSession();
 })
 .then(function() {
   casper.test.done();
