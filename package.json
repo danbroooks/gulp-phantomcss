@@ -1,11 +1,15 @@
 {
   "name": "gulp-phantomcss",
-  "version": "0.0.1",
+  "version": "0.0.2",
+  "homepage": "http://github.com/danbroooks/gulp-phantomcss",
+  "repository": "git://github.com/danbroooks/gulp-phantomcss.git",
+  "author": "Dan Brooks <db@seriouslaw.co.uk>",
   "scripts": {
     "test": "mocha"
   },
   "files": [
-    "index.js"
+    "index.js",
+    "runner.js"
   ],
   "dependencies": {
     "gulp-util": "^3.0.0",
