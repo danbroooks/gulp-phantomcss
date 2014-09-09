@@ -46,7 +46,9 @@ module.exports = function (opts) {
     spawnPhantom([
       runnerjs,
       JSON.stringify(opts)
-    ]);
+    ]).on('exit', function(){
+      cb();
+    });
   });
 
 };
