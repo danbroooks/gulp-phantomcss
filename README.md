@@ -1,6 +1,16 @@
 
 # gulp-phantomcss
 
+Run your phantomCSS tests with Gulp.
+
+## Installation
+
+`npm install gulp-phantomcss -D`
+
+If casper isn't already installed, install that too!
+
+`npm install -g casperjs`
+
 ## Useage
 
 gulpfile.js
