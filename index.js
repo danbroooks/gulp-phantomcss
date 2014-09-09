@@ -45,7 +45,6 @@ module.exports = function (opts) {
   }, function(cb){
     var running = 0;
     tests.forEach(function(test) {
-      console.log(test);
       opts.test = test;
       running++;
 
