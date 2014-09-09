@@ -22,6 +22,11 @@ function spawnPhantom(args){
 };
 
 module.exports = function (opts) {
+  if (_.isString(opts)) {
+    var screenshotDir = opts;
+    opts = {};
+    opts.screenshots = screenshotDir;
+  }
 
   opts = _.extend(opts || {}, {
     screenshots: 'screenshots',
