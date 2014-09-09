@@ -22,18 +22,19 @@ function spawnPhantom(args){
 };
 
 module.exports = function (opts) {
+
   if (_.isString(opts)) {
     var screenshotDir = opts;
     opts = {};
     opts.screenshots = screenshotDir;
   }
 
-  opts = _.extend(opts || {}, {
+  opts = _.extend({
     screenshots: 'screenshots',
     results: 'results',
     viewportSize: [1280, 800],
     logLevel: 'error'
-  });
+  }, opts || {});
 
   opts.phantomCSSPath = phantomcss;
   opts.test = [];
@@ -42,7 +43,7 @@ module.exports = function (opts) {
     opts.test.push(path.resolve(file.path));
     cb(null, file);
   }, function(cb){
-    var phantom = spawnPhantom([
+    spawnPhantom([
       runnerjs,
       JSON.stringify(opts)
     ]);
