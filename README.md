@@ -11,7 +11,7 @@ If casper isn't already installed, install that too!
 
 `npm install -g casperjs`
 
-## Useage
+## Usage
 
 gulpfile.js
 
@@ -22,6 +22,16 @@ gulpfile.js
       gulp.src('./testsuite.js')
         .pipe(phantomcss());
     });
+    
+    /**
+    Or, pass options to casper, eg. logLevel http://casperjs.readthedocs.org/en/latest/logging.html
+    gulp.task('phantomcss', function (){
+      gulp.src('./testsuite.js')
+        .pipe(phantomcss({
+            logLevel: 'debug'
+        }));
+    });
+    **/
 
 testsuite.js
 
