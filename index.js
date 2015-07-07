@@ -9,10 +9,6 @@ var through = require('through2');
 var runnerjs = path.join(__dirname, 'runner.js');
 var phantomcss = path.join(__dirname, 'node_modules', 'phantomcss');
 
-var defaults = _.partialRight(_.assign, function(a, b) {
-  return typeof a == 'undefined' ? b : a;
-});
-
 function spawnPhantom(args){
   var o = {
     stdio: 'inherit',
