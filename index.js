@@ -2,7 +2,6 @@
 
 var _ = require('lodash');
 var path = require('path');
-var gutil = require('gulp-util');
 var through = require('through2');
 
 var runnerjs = path.join(__dirname, 'runner.js');
