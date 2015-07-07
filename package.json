@@ -3,22 +3,18 @@
   "version": "0.0.4",
   "homepage": "http://github.com/danbroooks/gulp-phantomcss",
   "repository": "git://github.com/danbroooks/gulp-phantomcss.git",
-  "author": "Dan Brooks <db@seriouslaw.co.uk>",
+  "author": "Dan Brooks <danger.dan_@hotmail.co.uk>",
   "scripts": {
     "test": "mocha"
   },
-  "files": [
-    "index.js",
-    "runner.js"
-  ],
   "dependencies": {
-    "gulp-util": "^3.0.0",
-    "through2": "^0.6.1",
-    "lodash": "^2.4.1",
-    "phantomjs": "^1.9.7-15",
-    "phantomcss": "v0.6.0"
+    "gulp-util": "~3.0",
+    "through2": "~2.0",
+    "lodash": "~3.0",
+    "phantomjs": "~1.9",
+    "phantomcss": "~v0.10"
   },
   "devDependencies": {
-    "mocha": "^1"
+    "mocha": "~2.2"
   }
 }
