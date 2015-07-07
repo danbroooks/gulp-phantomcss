@@ -2,20 +2,13 @@
 
 var _ = require('lodash');
 var path = require('path');
-var spawn = require('child_process').spawn;
 var gutil = require('gulp-util');
 var through = require('through2');
 
 var runnerjs = path.join(__dirname, 'runner.js');
 var phantomcss = path.join(__dirname, 'node_modules', 'phantomcss');
 
-function spawnPhantom(args){
-  var o = {
-    stdio: 'inherit',
-    cwd: process.cwd()
-  };
-  return spawn(require('phantomjs').path, args, o);
-};
+var spawnPhantom = require('./src/spawnPhantom.js');
 
 module.exports = function (opts) {
 
