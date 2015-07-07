@@ -4,9 +4,7 @@ var _ = require('lodash');
 var path = require('path');
 var through = require('through2');
 
-var runnerjs = path.join(__dirname, 'runner.js');
-var phantomcss = path.join(__dirname, 'node_modules', 'phantomcss');
-
+var paths = require('./src/paths.js');
 var spawnPhantom = require('./src/spawnPhantom.js');
 
 module.exports = function (opts) {
@@ -24,7 +22,7 @@ module.exports = function (opts) {
     logLevel: 'error'
   }, opts || {});
 
-  opts.phantomCSSPath = phantomcss;
+  opts.phantomCSSPath = paths.phantomcss;
   var tests = [];
 
   return through.obj(function (file, enc, cb) {
@@ -37,7 +35,7 @@ module.exports = function (opts) {
       running++;
 
       spawnPhantom([
-        runnerjs,
+        paths.runnerjs,
         JSON.stringify(opts)
       ])
       .on('exit', function(){
