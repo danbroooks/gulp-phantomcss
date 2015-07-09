@@ -5,13 +5,14 @@
   "repository": "git://github.com/danbroooks/gulp-phantomcss.git",
   "author": "Dan Brooks <danger.dan_@hotmail.co.uk>",
   "scripts": {
+    "postinstall": "./node_modules/bower/bin/bower install phantomcss",
     "test": "mocha"
   },
   "dependencies": {
     "through2": "~2.0",
     "lodash": "~3.0",
     "phantomjs": "~1.9",
-    "phantomcss": "~v0.10"
+    "bower": "~1.2"
   },
   "devDependencies": {
     "mocha": "~2.2"

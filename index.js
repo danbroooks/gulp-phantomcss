@@ -2,10 +2,8 @@
 
 var _ = require('lodash');
 
-var gulpPhantomCss = require('./src/gulp-phantomcss.js').configure({
-    paths: require('./src/paths.js'),
-    phantom: require('./src/spawnPhantom.js')
-});
+var paths = require('./src/paths.js');
+var phantom = require('./src/spawnPhantom.js');
 
 module.exports = function (opts) {
 
@@ -15,5 +13,10 @@ module.exports = function (opts) {
     opts.screenshots = screenshotDir;
   }
 
-  return gulpPhantomCss.through(opts);
+  return require('./src/gulp-phantomcss.js')
+    .configure({
+      paths: paths,
+      phantom: phantom(paths.phantomjs).spawn
+    })
+    .through(opts);
 };

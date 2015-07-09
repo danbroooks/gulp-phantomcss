@@ -1,10 +1,19 @@
 
 var spawn = require('child_process').spawn;
 
-module.exports = function (args){
-    var opts = {
+module.exports = function (phantomPath) {
+
+  return {
+
+    spawn: function (script, args) {
+      var opts = {
         stdio: 'inherit',
         cwd: process.cwd()
-    };
-    return spawn(require('phantomjs').path, args, opts);
+      };
+
+      return spawn(phantomPath, [script, JSON.stringify(args)], opts);
+    }
+
+  };
+
 };

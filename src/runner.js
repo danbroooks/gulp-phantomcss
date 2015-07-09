@@ -5,6 +5,7 @@ var s = fs.separator;
 
 // Parse arguments passed in
 var args = JSON.parse(phantom.args[0]);
+var paths = args.paths;
 
 var viewportSize = {
   width: args.viewportSize[0],
@@ -17,9 +18,9 @@ var sendMessage = function() {
 };
 
 // Initialise CasperJs
-var phantomCSSPath = args.phantomCSSPath;
-phantom.casperPath = phantomCSSPath+s+'CasperJs';
-phantom.injectJs(phantom.casperPath+s+'bin'+s+'bootstrap.js');
+var phantomCSSPath = paths.phantomcss;
+phantom.casperPath = paths.casper;
+phantom.injectJs(paths.bin.casper+s+'bootstrap.js');
 
 var casper = require('casper').create({
   viewportSize: viewportSize,

@@ -3,15 +3,13 @@ var _ = require('lodash');
 var path = require('path');
 var through = require('through2');
 
-var plugin = {};
-
-plugin.configure = function(config) {
+module.exports.configure = function(config) {
   this.paths = config.paths;
   this.phantom = config.phantom;
   return this;
 };
 
-plugin.through = function(args){
+module.exports.through = function(args){
   args = _.extend({
     screenshots: 'screenshots',
     results: 'results',
@@ -19,17 +17,17 @@ plugin.through = function(args){
     logLevel: 'error'
   }, args || {});
 
-  args.phantomCSSPath = this.paths.phantomcss;
+  args.paths = this.paths;
   var phantom = this.phantom;
 
   var stream = through.obj(function(file, enc, cb) {
-    var test = path.resolve(file.path);
+    args.test = path.resolve(file.path);
 
-    phantom([ paths.runnerjs, JSON.stringify(opts) ])
+    phantom(args.paths.runnerjs, args)
       .on('exit', function(){
           cb(null, file);
       });
   });
-};
 
-module.exports = plugin;
+  return stream;
+};
