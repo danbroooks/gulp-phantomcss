@@ -1,6 +1,6 @@
 {
   "name": "gulp-phantomcss",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "homepage": "http://github.com/danbroooks/gulp-phantomcss",
   "repository": "git://github.com/danbroooks/gulp-phantomcss.git",
   "author": "Dan Brooks <danger.dan_@hotmail.co.uk>",
