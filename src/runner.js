@@ -21,6 +21,8 @@ var sendMessage = function() {
 var phantomCSSPath = paths.phantomcss;
 phantom.casperPath = paths.casper;
 phantom.injectJs(paths.bin.casper+s+'bootstrap.js');
+phantom.casperTest = true; // fix for CasperError: casper.test property is only available using the `casperjs test` command in Casper 1.1
+
 
 var casper = require('casper').create({
   viewportSize: viewportSize,
