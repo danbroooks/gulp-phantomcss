@@ -13,36 +13,63 @@ If casper isn't already installed, install that too!
 
 ## Usage
 
-gulpfile.js
+```js
+var gulp = require('gulp');
+var phantomcss = require('gulp-phantomcss');
 
-    var gulp = require('gulp');
-    var phantomcss = require('gulp-phantomcss');
+gulp.task('phantomcss', function (){
+  gulp.src('./testsuite.js')
+    .pipe(phantomcss());
+});
+```
 
-    gulp.task('phantomcss', function (){
-      gulp.src('./testsuite.js')
-        .pipe(phantomcss());
-    });
-    
-    /**
-    Or, pass options to casper, eg. logLevel http://casperjs.readthedocs.org/en/latest/logging.html
-    gulp.task('phantomcss', function (){
-      gulp.src('./testsuite.js')
-        .pipe(phantomcss({
-            logLevel: 'debug'
-        }));
-    });
-    **/
+Example ./testsuite.js :
 
-testsuite.js
+```js
+casper.
+  start( 'http://www.google.co.uk' ).
+  then(function(){
+    phantomcss.screenshot('#hplogo', 'google');
+  });
 
-    casper.
-      start( 'http://www.google.co.uk' ).
-      then(function(){
-        phantomcss.screenshot('#hplogo', 'google');
-      });
+casper.run();
+```
 
-    casper.run();
+### Options
 
+Options passed in to the plugin will be forwarded on to phantomcss, these include:
+
+#### options.screenshots
+
+Type: `String`
+
+Default: `'screenshots'`
+
+Directory where screenshot test fixtures are stored.
+
+#### options.results
+
+Type: `String`
+
+Default: `'results'`
+
+Directory where source, diff and failure screenshots are stored.
+
+#### options.viewportSize
+
+Type: `Array`
+
+Default: `[1280, 800]`
+
+Viewport size to run the test in. Useful for running tests for multiple window sizes.
+
+#### options.logLevel
+
+Type: `String`
+
+Default: `'error'`
+
+Log level for CasperJS, see [CasperJS: Logging](http://casperjs.readthedocs.org/en/latest/logging.html) for more information.
 
 ## Testing
 
