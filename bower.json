@@ -1,10 +1,10 @@
 {
-  "name": "gulp-phantomcss",
+  "name": "gulp-phantomcss2",
   "main": "index.js",
-  "version": "0.0.4",
-  "homepage": "https://github.com/danbroooks/gulp-phantomcss",
+  "version": "0.2.0",
+  "homepage": "https://github.com/pauljeter/gulp-phantomcss",
   "authors": [
-    "danbroooks <danger.dan_@hotmail.co.uk>"
+    "Paul Jeter <pauljeter@gmail.com>"
   ],
   "license": "MIT",
   "ignore": [

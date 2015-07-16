@@ -1,9 +1,9 @@
 {
-  "name": "gulp-phantomcss",
-  "version": "0.1.0",
-  "homepage": "http://github.com/danbroooks/gulp-phantomcss",
-  "repository": "git://github.com/danbroooks/gulp-phantomcss.git",
-  "author": "Dan Brooks <danger.dan_@hotmail.co.uk>",
+  "name": "gulp-phantomcss2",
+  "version": "0.2.0",
+  "homepage": "http://github.com/pauljeter/gulp-phantomcss",
+  "repository": "git://github.com/pauljeter/gulp-phantomcss.git",
+  "author": "Paul Jeter <pauljeter@gmail.com>",
   "scripts": {
     "postinstall": "./node_modules/bower/bin/bower install phantomcss",
     "test": "mocha"
