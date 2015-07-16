@@ -55,40 +55,6 @@ Default: `'results'`
 
 Directory where source, diff and failure screenshots are stored.
 
-#### options.failedComparisonsRoot
-
-Type: `String`
-
-Default: `'failures'`
-
-Directory where failure screenshots are stored.
-
-#### options.mismatchTolerance
-
-Type: `Number`
-
-Default: `0.05`
-
-Increasing this value will decrease test coverage.
-
-Callbacks for your specific integration
-
-#### options.reportsRoot
-
-Type: `String or boolean`
-
-Default: `false`
-
-Directory where report JSON will be stored. If false, no JSON will be generated.
-
-#### options.breakOnError
-
-Type: `boolean`
-
-Default: `false`
-
-If true, gulp task will exit with error code if there are any failing tests.
-
 The following options passed in to the plugin will be forwarded on to casperjs, these include:
 
 #### options.viewportSize
