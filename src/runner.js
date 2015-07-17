@@ -12,17 +12,11 @@ var viewportSize = {
   height: args.viewportSize[1]
 };
 
-// Messages are sent to the parent by appending them to the tempfile
-var sendMessage = function() {
-  fs.write(args.tempFile, JSON.stringify(Array.prototype.slice.call(arguments)) + '\n', 'a');
-};
-
 // Initialise CasperJs
 var phantomCSSPath = paths.phantomcss;
 phantom.casperPath = paths.casper;
-phantom.injectJs(paths.bin.casper+s+'bootstrap.js');
+phantom.injectJs(paths.bin.casper + s + 'bootstrap.js');
 phantom.casperTest = true; // fix for CasperError: casper.test property is only available using the `casperjs test` command in Casper 1.1
-
 
 var casper = require('casper').create({
   viewportSize: viewportSize,
@@ -31,37 +25,82 @@ var casper = require('casper').create({
 });
 
 // Require and initialise PhantomCSS module
-var phantomcss = require(phantomCSSPath+s+'phantomcss.js');
+var phantomcss = require(phantomCSSPath + s + 'phantomcss.js');
+var addLabelToFailedImage = false;
+var rebase = false;
+var cleanupComparisonImages = false;
+var comparisonResultRoot;
+var mismatchTolerance = 0.05;
+var hideElements;
+var outputSettings;
+var now = new Date();
+var date = now.toDateString();
+var reportName = date.replace(/\s/g, "-");
+var fail = false; // Flag for failing tests
+
+// Create report file if reportsRoot set in options
+var sendResult = function(result, test) {
+  if (args.reportsRoot) {
+    fs.write(args.reportsRoot + s + reportName + '.txt', JSON.stringify(test) + ',');
+  }
+  console.log('[' + result + '] ' + JSON.stringify(test));
+};
+
+var onFail = function(test) {
+  sendResult('Fail', test);
+  fail = true;
+};
+
+var onPass = function(test) {
+  sendResult('Pass', test);
+};
+
+var onNewImage = function(test) {
+  console.log('[NEW IMAGE] ' + test.filename);
+};
+
+var onTimeout = function(test) {
+  console.log('[TIMEOUT] ' + test.filename);
+};
+
+var onComplete = function(allTests, noOfFails, noOfErrors) {};
 
 phantomcss.init({
-  screenshotRoot: args.screenshots,
-  failedComparisonsRoot: args.failures,
-  libraryRoot: phantomCSSPath, // Give absolute path, otherwise PhantomCSS fails
+  screenshotRoot: args.screenshots || args.screenshotRoot,
+  failedComparisonsRoot: args.failures || args.failedComparisonsRoot,
+  libraryRoot: args.libraryRoot || phantomCSSPath, // Give absolute path, otherwise PhantomCSS fails
+  addLabelToFailedImage: args.addLabelToFailedImage || addLabelToFailedImage,
+  comparisonResultRoot: args.comparisonResultRoot || args.results || comparisonResultRoot,
+  rebase: args.rebase || rebase,
+  cleanupComparisonImages: args.cleanupComparisonImages || cleanupComparisonImages,
+  mismatchTolerance: args.mismatchTolerance || mismatchTolerance,
+  outputSettings: args.outputSettings || outputSettings,
+  hideElements: args.hideElements || hideElements,
+  onPass: args.onPass || onPass,
+  onFail: args.onFail || onFail,
+  onTimeout: args.onTimeout || onTimeout,
+  onComplete: args.onComplete || onComplete
 
-  onFail: function(test) {
-    sendMessage('onFail', test);
-  },
-  onPass: function(test) {
-    sendMessage('onPass', test);
-  },
-  onTimeout: function(test) {
-    sendMessage('onTimeout', test);
-  },
-  onComplete: function(allTests, noOfFails, noOfErrors) {
-    sendMessage('onComplete', allTests, noOfFails, noOfErrors);
-  }
 });
+
+if (args.turnOffAnimations) {
+  phantomcss.turnOffAnimations();
+}
 
 // Run the test scenario
 require(args.test);
 
 // End tests and compare screenshots
 casper.then(function() {
-  phantomcss.compareSession();
-})
-.then(function() {
-  casper.test.done();
-})
-.run(function() {
-  phantom.exit();
-});
+    phantomcss.compareSession();
+  })
+  .then(function() {
+    casper.test.done();
+  })
+  .then(function() {
+    if (fail) {
+      phantom.exit(1);
+    } else {
+      phantom.exit(0);
+    }
+  });
