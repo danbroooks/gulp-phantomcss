@@ -12,7 +12,8 @@
     "through2": "~2.0",
     "lodash": "~3.0",
     "phantomjs": "~1.9",
-    "bower": "~1.3.8"
+    "bower": "~1.3.8",
+    "gulp-util": "^3.0.6"
   },
   "devDependencies": {
     "mocha": "~2.2"
