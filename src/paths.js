@@ -3,10 +3,12 @@ var path = require('path');
 
 var root = path.join(__dirname, '..');
 
+var isWin = /^win/.test(process.platform);
+
 var paths = {
   root: root,
   runnerjs: path.join(root, 'src', 'runner.js'),
-  phantomjs: path.join(root, 'node_modules', '.bin', 'phantomjs'),
+  phantomjs: path.join(root, 'node_modules', '.bin', 'phantomjs'+(isWin ? ".cmd" : "")),
   phantomcss: path.join(root, 'bower_components', 'phantomcss')
 };
 
