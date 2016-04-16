@@ -1,18 +1,29 @@
-
 var path = require('path');
+var fs = require('fs');
 
 var root = path.join(__dirname, '..');
+var parentNodeModules = path.join(root, '..');
+var rootNodeModules = path.join(root, 'node_modules');
 
-var isWin = /^win/.test(process.platform);
+var currentNodeModules;
+try {
+  if (fs.lstatSync(path.join(rootNodeModules, 'phantomcss')).isDirectory()) {
+    currentNodeModules = rootNodeModules;
+  }
+} catch (e) {
+  currentNodeModules = parentNodeModules;
+}
+
+var phantomjs = require('phantomjs-prebuilt');
+var phantomjsBinPath = phantomjs.path;
 
 var paths = {
   root: root,
   runnerjs: path.join(root, 'src', 'runner.js'),
-  phantomjs: path.join(root, 'node_modules', '.bin', 'phantomjs'+(isWin ? ".cmd" : "")),
-  phantomcss: path.join(root, 'bower_components', 'phantomcss')
+  phantomjs: phantomjsBinPath,
+  phantomcss: path.join(currentNodeModules, 'phantomcss'),
+  casper: path.join(currentNodeModules, 'casperjs')
 };
-
-paths.casper = path.join(paths.phantomcss, 'libs', 'casperjs');
 
 var bin = {
   casper: path.join(paths.casper, 'bin')
