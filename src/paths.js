@@ -3,15 +3,19 @@ var path = require('path');
 
 var root = path.join(__dirname, '..');
 
-var isWin = /^win/.test(process.platform);
+var phantomjs = require('phantomjs-prebuilt');
+var phantomjsBinPath = phantomjs.path;
 
+//var isWin = /^win/.test(process.platform);
+console.log('Hammer: ' + phantomjsBinPath);
 var paths = {
     root: root,
     runnerjs: path.join(root, 'src', 'runner.js'),
-    phantomjs: path.join(root, 'node_modules', '.bin', 'phantomjs' + (isWin ? ".cmd" : "")),
-    phantomcss: path.join(root, 'node_modules', 'phantomcss')
+    phantomjs: phantomjsBinPath,
+    phantomcss: path.join(root, 'node_modules', 'phantomcss'),
+    phantomcssModule: require.resolve('phantomcss')
 };
-
+console.log('yoyo'+paths.phantomcssModule);
 paths.casper = path.join(paths.phantomcss, 'node_modules', 'casperjs');
 
 var bin = {

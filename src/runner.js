@@ -14,7 +14,6 @@ var viewportSize = {
 };
 
 // Initialise CasperJs
-var phantomCSSPath = paths.phantomcss;
 phantom.casperPath = paths.casper;
 phantom.injectJs(paths.bin.casper + s + 'bootstrap.js');
 phantom.casperTest = true; // fix for CasperError: casper.test property is only available using the `casperjs test` command in Casper 1.1
@@ -26,7 +25,7 @@ var casper = require('casper').create({
 });
 
 // Require and initialise PhantomCSS module
-var phantomcss = require(phantomCSSPath + s + 'phantomcss.js');
+var phantomcss = require(paths.phantomcssModule);
 var fail = false; // Flag for failing tests
 
 // Create report file if reportsRoot set in options
