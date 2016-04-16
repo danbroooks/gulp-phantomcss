@@ -12,10 +12,9 @@ var paths = {
     root: root,
     runnerjs: path.join(root, 'src', 'runner.js'),
     phantomjs: phantomjsBinPath,
-    phantomcss: path.join(root, 'node_modules', 'phantomcss'),
-    phantomcssModule: require.resolve('phantomcss')
+    phantomcss: path.join(root, 'node_modules', 'phantomcss')
 };
-console.log('yoyo'+paths.phantomcssModule);
+
 paths.casper = path.join(paths.phantomcss, 'node_modules', 'casperjs');
 
 var bin = {
