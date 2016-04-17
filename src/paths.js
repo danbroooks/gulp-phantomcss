@@ -6,16 +6,16 @@ var root = path.join(__dirname, '..');
 var phantomjs = require('phantomjs-prebuilt');
 var phantomjsBinPath = phantomjs.path;
 
-//var isWin = /^win/.test(process.platform);
-console.log('Hammer: ' + phantomjsBinPath);
+var getInstalledPath = require('get-installed-path');
+
 var paths = {
     root: root,
     runnerjs: path.join(root, 'src', 'runner.js'),
     phantomjs: phantomjsBinPath,
-    phantomcss: path.join(root, 'node_modules', 'phantomcss')
+    phantomcss: getInstalledPath('phantomcss', true)//path.join(root, 'node_modules', 'phantomcss')
 };
 
-paths.casper = path.join(paths.phantomcss, 'node_modules', 'casperjs');
+paths.casper = getInstalledPath('casperjs', true);//path.join(paths.phantomcss, 'node_modules', 'casperjs');
 
 var bin = {
     casper: path.join(paths.casper, 'bin')
