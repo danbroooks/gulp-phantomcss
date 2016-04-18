@@ -35,12 +35,16 @@ var sendResult = function(result, test) {
 };
 
 var onFail = function(test) {
-    sendResult('Fail', test);
+    sendResult('FAIL', test);
     fail = true;
 };
 
 var onPass = function(test) {
-    sendResult('Pass', test);
+    sendResult('PASS', test);
+};
+
+var onNewImage = function(test) {
+    console.log('[NEW IMAGE] ' + test.filename);
 };
 
 var onTimeout = function(test) {
@@ -56,9 +60,9 @@ phantomcss.init({
     libraryRoot: phantomCSSPath, // Give absolute path, otherwise PhantomCSS fails
     onPass: args.onPass || onPass,
     onFail: args.onFail || onFail,
+    onNewImage: args.onNewImage || onNewImage,
     onTimeout: args.onTimeout || onTimeout,
     onComplete: args.onComplete || onComplete
-
 });
 
 // Run the test scenario
