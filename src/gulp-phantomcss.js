@@ -1,6 +1,5 @@
-var _ = require('lodash');
 var path = require('path');
-var through = require('through2');
+var through2Concurrent = require('through2-concurrent');
 var gutil = require('gulp-util');
 var PluginError = gutil.PluginError;
 
@@ -31,20 +30,22 @@ module.exports.through = function (args) {
         this.emit('end');
     }
 
-    return through.obj(function (file, enc, cb) {
-        if (file.isStream()) {
-            return this.emit('error', new PluginError(
-                'gulp-phantomcss', 'Streaming not supported'
-            ));
-        }
-        args.test = path.resolve(file.path);
+    return through2Concurrent.obj(
+        {maxConcurrency: 10},
+        function (file, enc, cb) {
+            if (file.isStream()) {
+                return this.emit('error', new PluginError(
+                    'gulp-phantomcss', 'Streaming not supported'
+                ));
+            }
+            args.test = path.resolve(file.path);
 
-        phantom(args.paths.runnerjs, args)
-            .on('exit', function (fail) {
-                if (fail) {
-                    error++;
-                }
-                cb(null, file);
-            });
-    }, endStream);
+            phantom(args.paths.runnerjs, args)
+                .on('exit', function (fail) {
+                    if (fail) {
+                        error++;
+                    }
+                    cb(null, file);
+                });
+        }, endStream);
 };
