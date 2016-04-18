@@ -1,6 +1,6 @@
 {
   "name": "gulp-phantomcss",
-  "version": "0.2.1",
+  "version": "0.2.0",
   "description": "Gulp plugin for PhantomCSS",
   "main": "index.js",
   "homepage": "http://github.com/danbroooks/gulp-phantomcss#readme",
@@ -13,12 +13,12 @@
     "test": "mocha"
   },
   "dependencies": {
-    "casperjs": "^1.1.0",
-    "gulp-util": "^3.0.6",
-    "lodash": "3.10.1",
-    "phantomcss": "1.0.0",
-    "phantomjs-prebuilt": "2.1.7",
-    "through2": "2.0.1"
+    "casperjs": "~1.1.0",
+    "gulp-util": "~3.0.6",
+    "lodash": "~3.10.1",
+    "phantomcss": "~1.0.0",
+    "phantomjs-prebuilt": "~2.1.7",
+    "through2": "~2.0.1"
   },
   "devDependencies": {
     "mocha": "~2.2"
