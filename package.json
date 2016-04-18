@@ -18,7 +18,7 @@
     "lodash": "~3.10.1",
     "phantomcss": "~1.0.0",
     "phantomjs-prebuilt": "~2.1.7",
-    "through2-concurrent": "^1.1.0"
+    "through2-concurrent": "~1.1.0"
   },
   "devDependencies": {
     "mocha": "~2.2"
