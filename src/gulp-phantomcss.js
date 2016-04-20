@@ -2,6 +2,7 @@ var path = require('path');
 var through2Concurrent = require('through2-concurrent');
 var gutil = require('gulp-util');
 var PluginError = gutil.PluginError;
+var _ = require('lodash');
 
 module.exports.configure = function (config) {
     this.paths = config.paths;
