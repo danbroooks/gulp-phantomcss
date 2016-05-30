@@ -16,7 +16,7 @@
     "casperjs": "~1.1.0",
     "gulp-util": "~3.0.6",
     "lodash": "~3.10.1",
-    "phantomcss": "~1.0.0",
+    "phantomcss": "~1.1.2",
     "phantomjs-prebuilt": "~2.1.7",
     "through2-concurrent": "~1.1.0"
   },
