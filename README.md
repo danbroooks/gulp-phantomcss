@@ -4,6 +4,7 @@
 Run your phantomCSS tests with Gulp.
 
 ## Installation
+Uninstall global node installations of casperjs and phantomjs
 
 `npm install gulp-phantomcss -D`
 
