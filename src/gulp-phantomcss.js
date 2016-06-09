@@ -29,7 +29,25 @@ module.exports.through = function (args) {
   var phantom = this.phantom;
   var error = 0;
 
-  function endStream(file, cb) {
+  function transform(file, enc, callback) {
+    if (file.isStream()) {
+      return this.emit('error', new PluginError(
+        'gulp-phantomcss', 'Streaming not supported'
+      ));
+    }
+
+    args.test = path.resolve(file.path);
+
+    phantom(args.paths.runnerjs, args)
+      .on('exit', function (fail) {
+        if (fail) {
+          error++;
+        }
+        callback(null, file);
+      });
+  }
+
+  function flush() {
     if (args.breakOnError && error > 0) {
       return this.emit('error', new PluginError(
         'gulp-phantomcss', 'Some tests have failed.'
@@ -38,22 +56,5 @@ module.exports.through = function (args) {
     this.emit('end');
   }
 
-  return through2Concurrent.obj(
-    {maxConcurrency: 10},
-    function (file, enc, cb) {
-      if (file.isStream()) {
-        return this.emit('error', new PluginError(
-          'gulp-phantomcss', 'Streaming not supported'
-        ));
-      }
-      args.test = path.resolve(file.path);
-
-      phantom(args.paths.runnerjs, args)
-        .on('exit', function (fail) {
-          if (fail) {
-            error++;
-          }
-          cb(null, file);
-        });
-    }, endStream);
+  return through2Concurrent.obj({maxConcurrency: 10}, transform, flush);
 };
