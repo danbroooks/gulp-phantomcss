@@ -13,9 +13,7 @@ module.exports.configure = function (config) {
 module.exports.through = function (args) {
 
   if (_.isString(args)) {
-    var screenshotDir = args;
-    args = {};
-    args.screenshots = screenshotDir;
+    args = { screenshots: args };
   }
 
   args = _.extend({
