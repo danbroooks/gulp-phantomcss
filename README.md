@@ -36,7 +36,7 @@ casper.run();
 
 Options passed in to the plugin will be forwarded on to phantomcss, these include:
 
-#### options.screenshotRoot
+#### options.screenshots
 
 Type: `String`
 
