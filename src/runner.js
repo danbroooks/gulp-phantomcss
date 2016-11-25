@@ -55,8 +55,8 @@ var onComplete = function (allTests, noOfFails, noOfErrors) {
 };
 
 phantomcss.init({
-  screenshotRoot: args.screenshots || args.screenshotRoot, // Add ability to use original option from PhantomCSS
-  failedComparisonsRoot: args.failures || args.failedComparisonsRoot, // Add ability to use original option from PhantomCSS
+  screenshotRoot: args.screenshotRoot || args.screenshots, // Add ability to use original option from PhantomCSS
+  failedComparisonsRoot: args.failedComparisonsRoot || args.failures, // Add ability to use original option from PhantomCSS
   comparisonResultRoot: args.comparisonResultRoot,
   libraryRoot: phantomCSSPath, // Give absolute path, otherwise PhantomCSS fails
   onPass: args.onPass || onPass,
