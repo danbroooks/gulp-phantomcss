@@ -63,7 +63,8 @@ phantomcss.init({
   onFail: args.onFail || onFail,
   onNewImage: args.onNewImage || onNewImage,
   onTimeout: args.onTimeout || onTimeout,
-  onComplete: args.onComplete || onComplete
+  onComplete: args.onComplete || onComplete,
+  prefixCount: !!args.prefixCount
 });
 
 // Run the test scenario
