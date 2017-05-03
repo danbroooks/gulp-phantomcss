@@ -58,12 +58,14 @@ phantomcss.init({
   screenshotRoot: args.screenshots || args.screenshotRoot, // Add ability to use original option from PhantomCSS
   failedComparisonsRoot: args.failures || args.failedComparisonsRoot, // Add ability to use original option from PhantomCSS
   comparisonResultRoot: args.comparisonResultRoot,
-  libraryRoot: phantomCSSPath, // Give absolute path, otherwise PhantomCSS fails
+  libraryRoot: args.libraryRoot || phantomCSSPath, // Give absolute path, otherwise PhantomCSS fails
   onPass: args.onPass || onPass,
   onFail: args.onFail || onFail,
   onNewImage: args.onNewImage || onNewImage,
   onTimeout: args.onTimeout || onTimeout,
-  onComplete: args.onComplete || onComplete
+  onComplete: args.onComplete || onComplete,
+  casper: args.casper || casper,
+  prefixCount: !!args.prefixCount
 });
 
 // Run the test scenario
