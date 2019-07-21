@@ -10,7 +10,7 @@ module.exports.configure = function (config) {
   return this;
 };
 
-module.exports.through = function (args) {
+module.exports.through = function (args, flags) {
 
   if (_.isString(args)) {
     args = { screenshots: args };
@@ -36,7 +36,7 @@ module.exports.through = function (args) {
 
     args.test = path.resolve(file.path);
 
-    phantom(args.paths.runnerjs, args)
+    phantom(args.paths.runnerjs, args, flags)
       .on('exit', function (fail) {
         if (fail) {
           error++;

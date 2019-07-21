@@ -1,83 +1,34 @@
 
-# gulp-phantomcss
+# gulp-phantomcss-options
 
-Run your phantomCSS tests with Gulp.
+Run your phantomCSS tests with Gulp.  
+This is a fork of gulp-phantomcss by Dan Brooks. It allows passing command line options to phantomJs.
 
 ## Installation
 Uninstall global node installations of casperjs and phantomjs
 
-`npm install gulp-phantomcss -D`
+`npm install gulp-phantomcss-options -D`
 
 ## Usage
 
 ```js
 var gulp = require('gulp');
 var phantomcss = require('gulp-phantomcss');
+var settings = require('../settings/phantomcss.json'); // path to a config file
 
 gulp.task('phantomcss', function (){
   gulp.src('./testsuite.js')
-    .pipe(phantomcss());
+    .pipe(phantomcss({
+            screenshotRoot: './phantomcss/screenshots',
+            failedComparisonsRoot: './phantomcss/failures',
+            comparisonResultRoot: './phantomcss/results',
+            screenshots: './phantomcss/base',
+            logLevel: 'error' // or: 'info', 'debug'
+          },
+          '--ignore-ssl-errors=true' // pass command line options
+        ));
 });
 ```
 
-Example ./testsuite.js :
-
-```js
-casper.
-  start( 'http://www.google.co.uk' ).
-  then(function(){
-    phantomcss.screenshot('#hplogo', 'google');
-  });
-
-casper.run();
-```
-
-### Options
-
-Options passed in to the plugin will be forwarded on to phantomcss, these include:
-
-#### options.screenshots
-
-Type: `String`
-
-Default: `'screenshots'`
-
-Directory where screenshot test fixtures are stored.
-
-#### options.comparisonResultRoot
-
-Type: `String`
-
-Default: `'results'`
-
-Directory where source, diff and failure screenshots are stored.
-
-#### options.breakOnError
-
-Type: `boolean`
-
-Default: `false`
-
-If true, gulp task will exit with error code if there are any failing tests.
-
-The following options passed in to the plugin will be forwarded on to casperjs, these include:
-
-#### options.viewportSize
-
-Type: `Array`
-
-Default: `[1280, 800]`
-
-Viewport size to run the test in. Useful for running tests for multiple window sizes.
-
-#### options.logLevel
-
-Type: `String`
-
-Default: `'error'`
-
-Log level for CasperJS, see [CasperJS: Logging](http://casperjs.readthedocs.org/en/latest/logging.html) for more information.
-
-## Testing
-
-Run tests with `npm test`
+## More info
+See https://github.com/danbroooks/gulp-phantomcss

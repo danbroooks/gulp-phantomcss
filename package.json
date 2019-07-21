@@ -1,15 +1,15 @@
 {
-  "name": "gulp-phantomcss",
-  "version": "0.3.0",
-  "description": "Gulp plugin for PhantomCSS",
+  "name": "gulp-phantomcss-options",
+  "version": "0.1.0",
+  "description": "Gulp plugin for PhantomCSS with command line options, fork from gulp-phantomcss",
   "main": "index.js",
-  "homepage": "http://github.com/danbroooks/gulp-phantomcss#readme",
+  "homepage": "https://github.com/kromakollision/gulp-phantomcss#readme",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/danbroooks/gulp-phantomcss.git"
+    "url": "git+https://github.com/kromakollision/gulp-phantomcss.git"
   },
-  "author": "Dan Brooks <danger.dan_@hotmail.co.uk>",
+  "author": "Koen Buckinx <koen.buckinx@gmail.com>",
   "scripts": {
     "test": "jasmine"
   },
